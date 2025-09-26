@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Nautilus94</title>
+  <link rel="icon" type="image/png" href="gojocat.png">
+  <link rel="shortcut icon" type="image/png" href="gojocat.png">
+
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+
+    #gameList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    a.game-link {
+      padding: 10px 16px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #222;
+      border-radius: 6px;
+      font-size: 16px;
+      white-space: nowrap;
+      width: auto;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+
+    a.game-link:hover {
+      background-color: #444;
+    }
+
+    #searchBar {
+      width: 240px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      background-color: #222;
+      color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+
+  <input type="text" id="searchBar" placeholder="Search games..." />
+
+  <div id="gameList">
+    <a class="game-link" href="CookieClicker.html">Cookie Clicker</a>
+
+    <!-- Add more buttons here -->
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchBar = document.getElementById('searchBar');
+      const gameList = document.getElementById('gameList');
+      const gameLinks = gameList.querySelectorAll('.game-link');
+
+      searchBar.addEventListener('input', () => {
+        const query = searchBar.value.toLowerCase();
+        gameLinks.forEach(link => {
+          const text = link.textContent.toLowerCase();
+          link.style.display = text.includes(query) ? 'inline-block' : 'none';
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
