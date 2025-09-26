@@ -1,0 +1,19 @@
+#game-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.game-link {
+  padding: 10px 20px;
+  background: #222;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+}
+
+.game-link:hover {
+  transform: scale(1.05);
+  background: #444;
+}
