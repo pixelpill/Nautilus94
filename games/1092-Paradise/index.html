@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>1092 Paradise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: black;
+      font-family: 'Courier New', monospace;
+      color: red;
+    }
+
+    .screen {
+      position: fixed;
+      inset: 0;
+      display: none;
+    }
+    .screen.active {
+      display: flex;
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    /* Landing */
+    .landing-link {
+      font-size: 3em;
+      text-decoration: none;
+      color: red;
+    }
+    .landing-link:hover {
+      text-shadow: 0 0 8px red;
+    }
+
+    /* Doors screen */
+    .doors-bg {
+      position: fixed;
+      inset: 0;
+      background-image: url('doors.jpeg'); /* replace with your image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      z-index: 1;
+    }
+    .top-text {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      font-size: 1.5em;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Password gate */
+    .gate-container {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .gate-input {
+      font-size: 2em;
+      padding: 10px;
+      width: 300px;
+      background: black;
+      color: red;
+      border: none;
+      border-bottom: 2px solid red;
+      outline: none;
+      text-align: center;
+    }
+    .gate-button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      background: red;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+    .corner-hint {
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+      color: red;
+      font-size: 1.2em;
+      opacity: 0.6;
+      z-index: 10;
+    }
+
+    /* Wrong page */
+    .wrong-content {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+
+    /* Final page */
+    .final-content {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Landing -->
+  <section id="landing" class="screen active">
+    <div class="center">
+      <a class="landing-link" href="#doors" onclick="go('doors')">I WANT PARADISE</a>
+    </div>
+  </section>
+
+  <!-- Doors -->
+  <section id="doors" class="screen">
+    <div class="doors-bg" onclick="go('gate')"></div>
+    <div class="top-text">the options are there</div>
+  </section>
+
+  <!-- Password gate -->
+  <section id="gate" class="screen">
+    <div class="center gate-container">
+      <input id="pw" class="gate-input" type="text" placeholder="Enter the word" autocomplete="off" />
+      <button class="gate-button" onclick="check()">Submit</button>
+    </div>
+    <div class="corner-hint">hell</div>
+  </section>
+
+  <!-- Wrong answer -->
+  <section id="wrong" class="screen">
+    <div class="center wrong-content">
+      <div>you chose poorly</div>
+      <button onclick="go('gate')">try again</button>
+    </div>
+  </section>
+
+  <!-- Final (correct) -->
+  <section id="final" class="screen">
+    <div class="center final-content">
+      <div>welcome to paradise</div>
+      <div>it was always here, waiting</div>
+    </div>
+  </section>
+
+  <script>
+    const screens = ['landing','doors','gate','wrong','final'];
+
+    function go(id) {
+      screens.forEach(s => {
+        document.getElementById(s).classList.toggle('active', s === id);
+      });
+      if (id === 'gate') {
+        setTimeout(() => document.getElementById('pw').focus(), 50);
+      }
+    }
+
+    function check() {
+      const val = (document.getElementById('pw').value || '').trim().toLowerCase();
+      if (val === 'hell') {
+        go('final');
+      } else {
+        go('wrong');
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('gate').classList.contains('active') && e.key === 'Enter') {
+        check();
+      }
+    });
+  </script>
+</body>
+</html>
