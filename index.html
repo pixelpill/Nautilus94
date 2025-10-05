@@ -4,16 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Nautilus94</title>
-  <link rel="icon" type="image/png" href="gojocat.png">
-  <link rel="shortcut icon" type="image/png" href="gojocat.png">
-
+ 
   <style>
     body {
-      background-image: url('IMG_0002.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+      background-color: #111;
       color: #eee;
       font-family: sans-serif;
       padding: 40px;
@@ -29,23 +23,20 @@
     }
 
     a.game-link {
-      padding: 10px 20px;
+      padding: 10px 16px;
       text-decoration: none;
       color: #fff;
       background-color: #222;
-      border-radius: 999px;
+      border-radius: 6px;
       font-size: 16px;
-      font-weight: 500;
       white-space: nowrap;
+      width: auto;
       display: inline-block;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-      box-shadow: 0 0 0 2px #333;
+      transition: background 0.2s;
     }
 
     a.game-link:hover {
-      background-color: #333;
-      transform: scale(1.05);
-      box-shadow: 0 0 0 2px #555;
+      background-color: #444;
     }
 
     #searchBar {
@@ -58,16 +49,6 @@
       background-color: #222;
       color: #eee;
     }
-
-    #music-player {
-      margin-bottom: 20px;
-    }
-
-    #now-playing {
-      margin-left: 10px;
-      font-weight: bold;
-      color: #4caf50;
-    }
   </style>
 </head>
 
@@ -75,21 +56,10 @@
 
   <input type="text" id="searchBar" placeholder="Search games..." />
 
- 
   <div id="gameList">
     <a class="game-link" href="games/Cookie-Clicker.html">Cookie Clicker</a>
     <a class="game-link" href="games/Pixel-Speedrun.html">Pixel Speedrun</a>
     <a class="game-link" href="games/Drive-Mad.html">Drive Mad</a>
-    <a class="game-link" href="games/A-Small-World-Cup.html">A Small World Cup</a>
-    <a class="game-link" href="games/There-Is-No-Game.html">There Is No Game</a>
-    <a class="game-link" href="games/Edys-Car-Simulator.html">Edy's Car Simulator</a>
-    <a class="game-link" href="games/Extreme-Run-3D.html">Extreme Run 3D</a>
-    <a class="game-link" href="games/UZG.html">Untitled Zombie Game</a>
-    <a class="game-link" href="games/Ragdoll-Archers.html">Ragdoll Archers</a>
-    <a class="game-link" href="games/Yellow.html">Yellow</a>
-      <a class="game-link" href="games/Doge-Miner.html">Doge Miner</a>
-    
-    
     <!-- Add more buttons here -->
   </div>
 
@@ -110,37 +80,6 @@
           const text = link.textContent.toLowerCase();
           link.style.display = text.includes(query) ? 'inline-block' : 'none';
         });
-      });
-
-      // 🎵 Music Player Logic
-      const songs = [
-        'music/Kevin Macleod_Fluffing a Duck.mp3',
-      
-      ];
-
-      const audio = document.getElementById('audio');
-      const playBtn = document.getElementById('play-btn');
-      const nowPlaying = document.getElementById('now-playing');
-
-      function loadRandomSong() {
-        const randomIndex = Math.floor(Math.random() * songs.length);
-        const selectedSong = songs[randomIndex];
-        audio.src = selectedSong;
-
-        const songName = selectedSong.split('/').pop().replace('.mp3', '');
-        nowPlaying.innerHTML = `Now playing: <em>${songName}</em>`;
-      }
-
-      loadRandomSong();
-
-      playBtn.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play();
-          playBtn.textContent = '⏸ Pause';
-        } else {
-          audio.pause();
-          playBtn.textContent = '▶️ Play';
-        }
       });
     });
   </script>
